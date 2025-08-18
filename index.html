@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="style.css">
+
   <meta charset="UTF-8">
   <title>Precise Age Calculator</title>
   <style>
@@ -52,6 +54,7 @@
   </style>
 </head>
 <body>
+  <div>
   <div class="container">
     <h2>Precise Age Calculator</h2>
 
@@ -61,14 +64,10 @@
     <label for="country">Country of Birth:</label>
     <input type="text" id="country" name="country" placeholder="Enter country">
 
-  
     <label for="birthdate">Enter Birth Date:</label>
-    <!-- type="date" gives a calendar picker -->
     <input type="date" id="birthdate" name="birthdate">
 
-    <!-- BIRTH TIME input -->
     <label for="birthtime">Birth Time:</label>
-    <!-- type="time" lets user select hours/minutes -->
     <input type="time" id="birthtime" name="birthtime">
 
     <!-- RADIO BUTTONS for alive/dead -->
@@ -120,5 +119,6 @@
       }
     }
   </script>
+  </div>
 </body>
 </html>
