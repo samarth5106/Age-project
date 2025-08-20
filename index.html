@@ -80,7 +80,7 @@
 
     <!-- RADIO BUTTONS for alive/dead -->
     <!-- notice how we use person's name dynamically inside label -->
-    <div class="radio-group">
+    <div class="radio-group" id="heartbeat">
       <span id="aliveQuestion">Is the person still alive?</span><br>
       <label>
         <input type="radio" name="alive" value="alive" onclick="toggleDeathInput()"> Yes
@@ -88,6 +88,7 @@
       <label>
         <input type="radio" name="alive" value="dead" onclick="toggleDeathInput()"> No
       </label>
+      
     </div>
 
     <!-- DEATH DATE input (hidden until user selects "No") -->
@@ -99,7 +100,7 @@
       <input type="time" id="deathtime" name="deathtime">
     </div>
 
-    <button style="margin-top: 15px; width: 100%;">Calculate Age</button>
+    <button style="margin-top: 15px; width: 100%;" class="submit">Calculate Age</button>
   </div>
 
   <script>
@@ -126,6 +127,8 @@
         document.getElementById("deathInputs").classList.add("hidden");
       }
     }
+    
+    
   </script>
   </div>
 </body>
