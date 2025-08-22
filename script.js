@@ -1,45 +1,78 @@
-document.getElementById("ageForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+document.getElementById("calculateBtn").addEventListener("click", function () {
+    const birthDateInput = document.getElementById("birthDate").value;
+    const alive = document.querySelector('input[name="alive"]:checked');
 
-    let country = document.getElementById("country").value;
-    let alive = document.getElementById("alive").value;
-    let birthDateStr = document.getElementById("birthDate").value;
-    let birthTimeStr = document.getElementById("birthTime").value || "00:00";
-    let deathDateStr = document.getElementById("deathDate").value;
-
-    // Parse birth datetime
-    let [birthHour, birthMinute] = birthTimeStr.split(":").map(Number);
-    let birthDate = new Date(birthDateStr);
-    birthDate.setHours(birthHour, birthMinute);
-
-    // Adjust for country timezone
-    if (timezoneOffsets[country] !== undefined) {
-        birthDate.setHours(birthDate.getHours() + timezoneOffsets[country]);
+    if (!birthDateInput || !alive) {
+        alert("⚠️ Please fill all required inputs.");
+        return;
     }
 
-    // Decide end date (death or now)
+    let birthDate = new Date(birthDateInput);
     let endDate;
-    if (alive === "no" && deathDateStr) {
-        endDate = new Date(deathDateStr);
+
+    if (alive.value === "yes") {
+        endDate = new Date(); // current time
     } else {
-        endDate = new Date();
+        const deathDateInput = document.getElementById("deathDate").value;
+        if (!deathDateInput) {
+            alert("⚠️ Please enter death date.");
+            return;
+        }
+        endDate = new Date(deathDateInput);
     }
 
-    // Calculate difference
-    let diffMs = endDate - birthDate;
-    let diffSec = Math.floor(diffMs / 1000);
-    let years = Math.floor(diffSec / (365*24*60*60));
-    diffSec %= (365*24*60*60);
-    let months = Math.floor(diffSec / (30*24*60*60));
-    diffSec %= (30*24*60*60);
-    let days = Math.floor(diffSec / (24*60*60));
-    diffSec %= (24*60*60);
-    let hours = Math.floor(diffSec / 3600);
-    diffSec %= 3600;
-    let minutes = Math.floor(diffSec / 60);
-    let seconds = diffSec % 60;
+    if (endDate < birthDate) {
+        alert("⚠️ Death/End date cannot be before birth date.");
+        return;
+    }
 
-    // Show result
-    document.getElementById("result").innerText = 
-        `Age: ${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds.`;
+    // --- Precise Age Calculation (Y/M/D/H/M/S) ---
+    let years = endDate.getFullYear() - birthDate.getFullYear();
+    let months = endDate.getMonth() - birthDate.getMonth();
+    let days = endDate.getDate() - birthDate.getDate();
+    let hours = endDate.getHours() - birthDate.getHours();
+    let minutes = endDate.getMinutes() - birthDate.getMinutes();
+    let seconds = endDate.getSeconds() - birthDate.getSeconds();
+
+    // Adjust negatives (borrowing logic like in C++)
+    if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+    }
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
+    if (days < 0) {
+        let prevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+    }
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
+    // --- Output ---
+    document.getElementById("result").innerHTML = `
+        <b>Precise Age:</b><br>
+        ${years} Years, ${months} Months, ${days} Days, 
+        ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds
+    `;
+});
+
+// Show/Hide death date input depending on Alive/Dead
+document.querySelectorAll('input[name="alive"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+        const deathDateDiv = document.getElementById("deathDateDiv");
+        if (this.value === "no") {
+            deathDateDiv.style.display = "block";
+        } else {
+            deathDateDiv.style.display = "none";
+        }
+    });
 });
