@@ -1,4 +1,5 @@
-document.getElementById("calculateBtn").addEventListener("click", function () {
+document.getElementById("calculateage").addEventListener("click", function () {
+     alert("Button clicked!");
     const birthDateInput = document.getElementById("birthDate").value;
     const alive = document.querySelector('input[name="alive"]:checked');
 
@@ -31,8 +32,8 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     let months = endDate.getMonth() - birthDate.getMonth();
     let days = endDate.getDate() - birthDate.getDate();
     let hours = endDate.getHours() - birthDate.getHours();
-    let minutes = endDate.getMinutes() - birthDate.getMinutes();
-    let seconds = endDate.getSeconds() - birthDate.getSeconds();
+  //  let minutes = endDate.getMinutes() - birthDate.getMinutes();
+   //let seconds = endDate.getSeconds() - birthDate.getSeconds();
 
     // Adjust negatives (borrowing logic like in C++)
     if (seconds < 0) {
