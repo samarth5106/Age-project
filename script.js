@@ -36,10 +36,7 @@ document.getElementById("calculateage").addEventListener("click", function () {
    //let seconds = endDate.getSeconds() - birthDate.getSeconds();
 
     // Adjust negatives (borrowing logic like in C++)
-    if (seconds < 0) {
-        seconds += 60;
-        minutes--;
-    }
+    
     if (minutes < 0) {
         minutes += 60;
         hours--;
@@ -62,7 +59,7 @@ document.getElementById("calculateage").addEventListener("click", function () {
     document.getElementById("result").innerHTML = `
         <b>Precise Age:</b><br>
         ${years} Years, ${months} Months, ${days} Days, 
-        ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds
+        ${hours} Hours, ${minutes} Minutes, 
     `;
 });
 
