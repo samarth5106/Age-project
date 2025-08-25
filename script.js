@@ -27,7 +27,7 @@ document.getElementById("calculateage").addEventListener("click", function () {
         return;
     }
 
-    // --- Precise Age Calculation (Y/M/D/H/M/S) ---
+    
     let years = endDate.getFullYear() - birthDate.getFullYear();
     let months = endDate.getMonth() - birthDate.getMonth();
     let days = endDate.getDate() - birthDate.getDate();
