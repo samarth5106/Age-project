@@ -145,13 +145,13 @@
       let months = now.getMonth() - birthDate.getMonth();
       let days = now.getDate() - birthDate.getDate();
 
-      // Adjust if negative days
+      // Adjusting if negative days
       if (days < 0) {
         months--;
         days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
       }
 
-      // Adjust if negative months
+      // Adjusting if negative months
       if (months < 0) {
         years--;
         months += 12;
