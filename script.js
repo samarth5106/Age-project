@@ -55,7 +55,7 @@ document.getElementById("calculateage").addEventListener("click", function () {
         years--;
     }
 
-    // --- Output ---
+    
     document.getElementById("result").innerHTML = `
         <b>Precise Age:</b><br>
         ${years} Years, ${months} Months, ${days} Days, 
