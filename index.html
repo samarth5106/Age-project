@@ -104,65 +104,7 @@
      <p id="result"></p>
   </div>
   <div id="output"></div>
-
-
-
-  <script>
-    // this function changes the question text dynamically
-    document.getElementById("name").oninput = function() {
-      let name = document.getElementById("name").value;
-      if (name) {
-        document.getElementById("aliveQuestion").innerText = "Is " + name + " still alive?";
-      } else {
-        document.getElementById("aliveQuestion").innerText = "Is the person still alive?";
-      }
-    }
-
-    // this function shows death date/time if "No" is selected
-    function toggleDeathInput() {
-      let radios = document.getElementsByName("alive");
-      let selected = "";
-      for (let r of radios) {
-        if (r.checked) selected = r.value;
-      }
-      if (selected === "dead") {
-        document.getElementById("deathInputs").classList.remove("hidden");
-      } else {
-        document.getElementById("deathInputs").classList.add("hidden");
-      }
-    }
-      function calculateAge() {
-      const birthDateInput = document.getElementById("birthDate").value;
-      if (!birthDateInput) {
-        document.getElementById("result").innerText = "Please select a valid date!";
-        return;
-      }
-
-      const birthDate = new Date(birthDateInput);
-      const now = new Date();
-
-      let years = now.getFullYear() - birthDate.getFullYear();
-      let months = now.getMonth() - birthDate.getMonth();
-      let days = now.getDate() - birthDate.getDate();
-
-      // Adjusting if negative days
-      if (days < 0) {
-        months--;
-        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-      }
-
-      // Adjusting if negative months
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-
-      document.getElementById("result").innerText =
-        `You are ${years} years, ${months} months, and ${days} days old.`;
-    }
-    
-    
-  </script>
+  
   </div>
   <script src="script.js"></script>
 </body>
